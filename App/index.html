@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Chances Amoureuses</title>
+    <style>
+        body {
+            overflow: hidden;        
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    padding: 5px;
+    justify-content: center;
+    margin: 0;
+    display: flex; /* Utilisation de flexbox pour centrer le contenu */
+            flex-direction: column; /* Alignement vertical */
+            align-items: center; /* Centre horizontal */
+            min-height: 100vh; /* Centrage vertical */
+            overflow-y: auto; /* Active le défilement vertical */
+}
+
+.app-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#calculator {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+}
+
+h1, h3, p {
+            margin: 0; /* Supprime la marge par défaut */
+            padding: 0; /* Supprime le padding par défaut */
+        }
+
+        h1 {
+            font-size: 35px; /* Taille du titre principal */
+            margin-bottom: 10px; /* Réduit l'espace sous le h1 */
+        }
+
+        h3 {
+            font-size: 21px; /* Taille des sous-titres */
+            margin-bottom: 0px; /* Réduit l'espace sous chaque h3 */
+        }
+
+        p {
+            font-size: 16px; /* Taille du texte du paragraphe */
+            margin-bottom: 20px; /* Réduit l'espace sous le paragraphe */
+            margin-top: 20px;
+        }
+
+label, select, input, button {
+    display: block;
+    width: 80%;  /* Réduire la largeur pour un rendu plus esthétique */
+    margin: 10px auto;  /* Centrage horizontal */
+    text-align: left;   /* Alignement du texte des labels à gauche pour plus de lisibilité */
+}
+
+button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;       /* Padding équilibré */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;           /* Pour centrer correctement */
+    margin: 0 auto;           /* Centre le bouton horizontalement */
+    font-size: 16px;          
+    font-weight: bold;        
+    text-align: center;       /* Centre le texte à l'intérieur du bouton */
+    min-width: 200px;         /* Largeur minimale pour éviter qu'il soit trop petit */
+}
+
+button:hover {
+    background-color: #e60000;
+    transform: scale(1.03);   /* Léger zoom au survol */
+    transition: 0.2s ease-in-out;
+}
+
+
+#result {
+    display: none;
+    margin-top: 20px;
+    background-color: #e8f5e9;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 128, 0, 0.2);
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    border: 1px solid #28a745;
+    
+}
+
+#form-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espace entre les colonnes */
+}
+
+#left-column, #right-column {
+    width: 48%; /* Chaque colonne prend presque la moitié de la largeur */
+}
+
+select {
+    height: 40px; /* Augmente la hauteur des menus déroulants */
+    font-size: 16px; /* Agrandit le texte */
+    padding: 5px;
+}
+
+input[type="range"] {
+    width: 80%; /* Assure que les sliders prennent toute la largeur */
+}
+
+
+label {
+    width: 100%;
+    display: block;
+    text-align: center; /* Centre le texte */
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.slider-scale {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 5px auto 15px auto;
+    font-size: 12px;
+    color: #555;
+}
+
+.social-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .social-buttons button {
+            background-color: #007bff; /* Couleur de fond */
+            color: white; /* Couleur du texte */
+            border: none; /* Pas de bordure */
+            padding: 10px; /* Espacement interne */
+            border-radius: 5px; /* Coins arrondis */
+            cursor: pointer; /* Curseur en main */
+            flex: 1; /* Prend toute la largeur disponible */
+            margin: 0 5px; /* Espace entre les boutons */
+            min-width: 100px; /* Largeur minimale pour les boutons */
+        }
+
+        .social-buttons button:hover {
+            background-color: #0056b3; /* Couleur au survol */
+        }
+
+        a {
+            text-decoration: none; /* Supprime le soulignement des liens */
+            color: inherit; /* Prend la couleur du texte parent */
+        }
+
+#info-box {
+            margin-top: 20px; /* Espace entre le calculateur et l'infobox */
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%; /* S'assure que l'infobox prend toute la largeur */
+            max-width: 400px; /* Limite la largeur maximale */
+            margin-bottom: 20px;
+            text-align: center; /* Centrer le texte dans l'infobox */
+
+        }
+
+        @media (max-width: 768px) {
+            #calculator {
+                max-width: 85vw; /* Le calculateur prend presque tout l'écran */
+            }
+        }
+
+    /* Supprimer l'affichage du lien hypertexte */
+    #info-box a {
+            color: black; /* Couleur du texte pour le lien */
+            text-decoration: none; /* Supprime le soulignement */
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="calculator" class="app-container">
+    <h1>AtomoLove </h1>
+    <h3>Estime tes chances</h3>
+    <h3>de trouver un partenaire </h3>
+    <p>Renseigne tes informations </p>
+    
+    <label for="city">Ville :</label>
+    <select id="city">
+        <option value="Lyon">Lyon</option>
+        <option value="Marseille">Marseille</option>
+        <option value="Toulouse">Toulouse</option>
+        <option value="Paris">Paris</option>
+        
+    </select>
+
+    <label for="age">Âge :</label>
+    <select id="age">
+        <option value="A1">20-24 ans</option>
+        <option value="A2">25-29 ans</option>
+        <option value="A3">30-34 ans</option>
+    </select>
+
+    <label for="gender">Genre :</label>
+    <select id="gender">
+        <option value="homme">Homme</option>
+        <option value="femme">Femme</option>
+    </select>
+
+    <label for="beauty">Beauté :</label>
+    <input type="range" id="beauty" min="1" max="10" value="5">
+    <div class="slider-scale">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+    </div>
+
+    <label for="socialSkills">Aptitudes Sociales :</label>
+    <input type="range" id="socialSkills" min="1" max="10" value="5">
+    <div class="slider-scale">
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+        <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+    </div>
+
+    <label for="attraction">Proportion de personnes que vous trouvez attirantes :</label>
+    <select id="attraction">
+        <option value="0.25">Peu de monde</option>
+        <option value="0.5">1 personne sur 2 </option>
+        <option value="0.75">La plupart des personnes </option>
+    </select>
+
+    <label for="university">Inclure le critère "a fait des études supérieures" ?</label>
+    <input type="checkbox" id="university">
+
+    <button onclick="calculate()">Calculer mes chances ❤️</button>
+
+    <div id="result"></div>
+</div>
+
+<div id="info-box">
+    <h3>À propos</h3>
+    <p>Développé par <strong><a href="https://x.com/AtomotionLab" target="_blank">@AtomotionLab
+    </a></strong></p>
+    <p>Pour en voir plus :</p>
+    <div class="social-buttons">
+        <button onclick="window.open('https://atomotion.gumroad.com/', '_blank')">Gumroad</button>
+        <button onclick="window.open('https://www.youtube.com/@atomotion', '_blank')">YouTube</button>
+    </div>
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
